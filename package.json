@@ -17,7 +17,11 @@
 		"dev:frontend": "yarn workspace @chibisafe/next dev",
 		"start:backend": "yarn workspace @chibisafe/backend start",
 		"start:frontend": "yarn workspace @chibisafe/next start",
-		"update": "yarn upgrade-interactive"
+		"update": "yarn upgrade-interactive",
+		"patch:apply": "rsync -a patch/ ./ && echo '✅ Branding patches applied.'",
+		"patch:revert": "git checkout -- $(git diff --name-only | grep '^packages/' || echo '') && echo '↩️ Branding patches reverted.'",
+		"patch:dev": "yarn patch:apply && yarn workspace @chibisafe/next dev && yarn patch:revert",
+		"patch:build": "yarn patch:apply && yarn build && yarn patch:revert"
 	},
 	"author": {
 		"name": "Pitu",
