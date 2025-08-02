@@ -1,4 +1,4 @@
-name: Build & Publish Chibisafe to GHCR
+name: SERVER - Build & Publish Chibisafe to GHCR
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Build & Publish Chibisafe to GHCR
+name: CLIENT - Build & Publish Chibisafe to GHCR
 
 on:
   push:
