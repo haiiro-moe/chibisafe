@@ -15,7 +15,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+  IMAGE_NAME: ${{ secrets.IMAGE_NAME_SERVER }}
 
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/DockerfileCustom
+          file: docker/DockerfileServer # We don't change the server Dockerfile, so we can use the same one
           push: true
           platforms: linux/amd64
           tags: |
