@@ -1,0 +1,55 @@
+name: Build & Publish Chibisafe to GHCR
+
+on:
+  push:
+    branches:
+      - branding
+    tags:
+      - 'my-brand-*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate TAG
+        id: tag
+        run: |
+          echo "TAG=$(git describe --tags --exact-match 2>/dev/null || echo branding-$(date +'%Y%m%d'))" >> $GITHUB_ENV
+
+      - name: Log in to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image to GHCR
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            ${{ env.IMAGE_NAME }}:latest-custom
+
+      - name: Output Image Info
+        run: echo "Published ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
