@@ -1,1 +1,114 @@
-/* whatever */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 9 10% 8%;
+		--foreground: 9 38% 86%;
+
+		--background-transparent: var(--background) / 0.8;
+
+		--muted: 223 47% 11%;
+		--muted-foreground: var(--foreground);
+
+		--accent: 246 34% 67%;
+		--accent-foreground: 272 68% 17%;
+
+		--popover: 9 9% 11%;
+		--popover-foreground: var(--foreground);
+
+		--border: var(--accent);
+		--input: var(--accent);
+
+		--card: var(--popover);
+		--card-foreground: var(--popover-foreground);
+
+		--primary: 206 38% 62%;
+		--primary-foreground: 206 38% 14%;
+
+		--secondary: 222.2 47.4% 11.2%;
+		--secondary-foreground: 210 40% 98%;
+
+		--destructive: 0 63% 31%;
+		--destructive-foreground: 210 40% 98%;
+
+		--ring: 216 34% 17%;
+
+		--radius: 0;
+	}
+
+	.blueprint {
+		background-image: linear-gradient(rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+			linear-gradient(rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+		background-size:
+			20px 20px,
+			20px 20px,
+			20px 20px,
+			20px 20px;
+		background-position: 50% 50%;
+	}
+}
+
+.blob {
+    background: radial-gradient(
+        circle at 50% 100%,
+        hsl(var(--accent) / 10%) 0%,
+        hsl(var(--primary) / 10%) 15%,
+        transparent 75%
+    );
+}
+
+.md\:hover\:outline-\[hsl\(216_77\%_45\%\)\]:hover {
+    outline: 1px solid hsl(var(--accent)) !important;
+}
+
+div.after\:from-\[rgb\(4_21_47_\/_0\.5\)\]::after {
+    --tw-gradient-from: hsl(var(--accent) / 0.15) var(--tw-gradient-from-position);
+}
+
+div.after\:via-\[rgb\(19_36_61_\/_0\.1\)\]::after {
+    --tw-gradient-via: hsl(var(--primary) / 0) var(--tw-gradient-via-position);
+}
+
+.link {
+    color: hsl(var(--accent));
+    text-decoration: underline;
+}
+
+.link:hover {
+    color: hsl(var(--accent) / 0.75);
+}
+
+.font-serif {
+    font-family: var(--font-heading);
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 62.5, "GRAD" 0;
+}
+.font-sans {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+}
+.font-mono {
+    font-family: var(--font-mono);
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100, "GRAD" 0;
+}
+
+h1 {
+    @apply font-serif;
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
+    font-weight: 300 !important;
+    background: linear-gradient(
+        to right,
+        hsl(var(--accent)),
+        hsl(var(--primary))
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
